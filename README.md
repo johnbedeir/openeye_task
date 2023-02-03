@@ -68,7 +68,7 @@ terraform destroy -auto-approve # To immediately destroy all the created resourc
 ## EC2 Provisioning:
 
 ### 1. Use the `script.sh`
-Create a `script.sh` file on the EC2 which will install docker, create docker volumes
+Create a `script.sh` file on the EC2 which will install docker, add docker to sudo group and create docker volumes
 ```
 vim scipt.sh
 ```
@@ -83,10 +83,12 @@ Run the Script:
 ./script.sh
 ```
 ## Run the Application
+### Option 1:
 Use either the following command to run a container without volumes exposing the application to port 8080:
 ```
 docker run -it -p 80:80 -p 3306:3306 appertaopeneyes/web-allin1
 ```
+### Option 2:
 Or the following command using the created docker volumes:
 ```
 docker run -it --name "openeyes" -v oe-web:/var/www/openeyes -v oe-db:/var/lib/mysql -p 80:80 -p 3306:3306 appertaopeneyes/web-allin1
